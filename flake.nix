@@ -21,6 +21,8 @@
           default = pkgs.mkShell {
             name = "dev-shell";
             buildInputs = with pkgs; [
+              python312
+              python312Packages.pip
               esptool
             ];
 
