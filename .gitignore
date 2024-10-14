@@ -58,6 +58,3 @@ build
 .direnv
 .envrc
 
-# nix files
-flake.nix
-flake.lock
