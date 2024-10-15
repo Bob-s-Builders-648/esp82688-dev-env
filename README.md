@@ -39,7 +39,7 @@ esp8266-dev-debian
 ```
 **Flags**
 - `--platform=linux/amd64` this ensures compatability with the Xtensa-Lx06 toolchain which runs on 64 bit x86 architecture
-- `-it --rm --privileged \` this flag keeps STDIN open when not attatched if we desire interactive input, allocates pesuto-TTY, removes the container when stopped, and grants extended priveleges to access the serial ports.
+- `-it --rm --privileged \` this flag keeps STDIN open when not attatched if we desire interactive input, allocates pesudo-TTY, removes the container when stopped, and grants extended priveleges to access the serial ports.
 - `--device=/dev/ttyUSB0 \` Gives container access to specific device on host machine
 - `-v $(pwd):/workspace \` Mounts volume to share between host and container. We will use this to share our project directory between the two.
 
@@ -63,9 +63,9 @@ Exit container and run command (replace `/dev/ttyUSB0` with actual device path.
 esptool.py --port /dev/ttyUSB0 write_flash 0x00000 build/bootloader/bootloader.bin 0x10000 build/hello-world.bin 0x8000 ./build/partitions_singleapp.bin
 ```
 As you can image `0x000000` `0x10000` and `0x8000` all correspond to addresses within memory, where we will directly flash the bootloader, partition table, and application binaries to the ESP8266.
-| `0x00000 - 0x00FFF` | `0x08000` | `0x01000 - 0x07FFF` |
-| ------------------- |---------- |-------------------- |
-| Bootloader | Partition Table | Program Binaries
+| `0x00000 - 0x00FFF` | `0x01000 - 0x07FFF` | `0x08000` |
+| ------------------- |-------------------- |---------- |
+| Bootloader | Program Binaries | Partition Table 
 
 The ESP8266 uses an external SPI flash memory chip to store these components in their corresponding addresses on chip. When booted it reads the boatloader firmware starting from `0x0`. It will reference the partition table at `0x08000` to determine where to find and how to manage program binaries at `0x10000`.
 
