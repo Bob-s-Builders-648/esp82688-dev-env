@@ -3,7 +3,7 @@
 # project subdirectory.
 #
 
-PROJECT_NAME := hw_timer
+PROJECT_NAME := demo2
 
 include $(IDF_PATH)/make/project.mk
 
